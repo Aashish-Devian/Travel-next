@@ -15,11 +15,7 @@ const Tours = () => {
   const [page, setPage] = useState(0);
 
   const { data: tours = [], loading, error } = useFetch(`${BASE_URL}/trips`);
-  console.log(tours, "Asdfas");
-
-  // } = useFetch(`${BASE_URL}/tours?page=${page}`);
   const { data: tourCount } = useFetch(`${BASE_URL}/tours/search/getTourCount`);
-  console.log(tours, "hello");
 
   useEffect(() => {
     const fetchTour = async () => {
