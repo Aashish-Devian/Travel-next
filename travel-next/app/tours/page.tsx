@@ -19,8 +19,6 @@ const Tours = () => {
 
   useEffect(() => {
     const fetchTour = async () => {
-      console.log("adfasdf");
-
       try {
         const res = await fetch(`http://localhost:5000`);
         if (!res.ok) throw new Error("Failed to fetch tour");
