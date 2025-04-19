@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const useFetch = (url) => {
   const [data, setData] = useState(null); // Initialize data as null
@@ -18,7 +18,7 @@ const useFetch = (url) => {
         }
 
         const result = await res.json();
-        setData(result.data);
+        setData(result);
         setLoading(false);
       } catch (error) {
         setError(error.message);

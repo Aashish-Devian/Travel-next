@@ -1,38 +1,47 @@
-"use client"
+"use client";
 
-import React, { useState, useEffect } from "react";
-import CommonSection from "../../shared/CommonSection";
-import "../../styles/tour.css";
-import TourCard from "../../shared/TourCard";
-import SearchBar from "../../shared/SearchBar";
-import Newsletter from "../../shared/Newsletter";
+import { useEffect, useState } from "react";
 import { Col, Container, Row } from "reactstrap";
 import useFetch from "../../hooks/useFetch";
+import CommonSection from "../../shared/CommonSection";
+import Newsletter from "../../shared/Newsletter";
+import SearchBar from "../../shared/SearchBar";
+import TourCard from "../../shared/TourCard";
+import "../../styles/tour.css";
 import { BASE_URL } from "../../utils/config";
 
 const Tours = () => {
   const [pageCount, setPageCount] = useState(0);
   const [page, setPage] = useState(0);
 
-  const {
-    data: tours,
-    loading,
-    error,
-  } = useFetch(`${BASE_URL}/tours?page=${page}`);
+  const { data: tours = [], loading, error } = useFetch(`${BASE_URL}/trips`);
+  console.log(tours, "Asdfas");
+
+  // } = useFetch(`${BASE_URL}/tours?page=${page}`);
   const { data: tourCount } = useFetch(`${BASE_URL}/tours/search/getTourCount`);
+  console.log(tours, "hello");
 
   useEffect(() => {
-      const pages = Math.ceil(tourCount / 8);
-      setPageCount(pages);
-      window.scrollTo(0, 0);
-  }, [page, tourCount, tours]);
+    const fetchTour = async () => {
+      console.log("adfasdf");
+
+      try {
+        const res = await fetch(`http://localhost:5000`);
+        if (!res.ok) throw new Error("Failed to fetch tour");
+        const data = await res.json();
+        console.log(data, "nabin");
+      } catch (err) {
+      } finally {
+      }
+    };
+
+    fetchTour();
+  }, []);
 
   // useEffect(() => {
-  //   if (tourCount) {
-  //     const pages = Math.ceil(tourCount / 8);
-  //     setPageCount(pages);
-  //     window.scrollTo(0, 0);
-  //   }
+  //   const pages = Math.ceil(tourCount / 8);
+  //   setPageCount(pages);
+  //   window.scrollTo(0, 0);
   // }, [page, tourCount, tours]);
 
   return (
@@ -52,8 +61,8 @@ const Tours = () => {
           {error && <h4 className="text-center pt-5">{error}</h4>}
           {!loading && !error && (
             <Row>
-              {tours?.map(tour => (
-                <Col lg="3" md="6" sm="6" className="mb-4" key={tour._id}>
+              {tours?.map((tour) => (
+                <Col lg="3" md="6" sm="6" className="mb-4" key={tour.trip_id}>
                   <TourCard tour={tour} />
                 </Col>
               ))}
