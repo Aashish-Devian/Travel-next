@@ -25,6 +25,7 @@ router.delete("/:id", verifyAdmin, deleteTour);
 
 // //Get single tour
 router.get("/:id", getSingleTour);
+router.get("/health", getSingleTour);
 
 // //Get all tour
 router.get("/", getAllTour);

@@ -39,5 +39,5 @@ app.use("/api/v1/booking", bookingRoute);
 app.listen(port, () => {
 // connectDB();
 
-  console.log("server start at http://localhost:", port);
+  console.log(`server start at http://localhost:${port}`);
 });
