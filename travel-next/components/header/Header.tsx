@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useRef, useEffect, useContext, useState } from 'react';
+import React, { useRef, useEffect, useContext, useState } from "react";
 import { Button, Container, Row } from "reactstrap";
 // import logo from "../../assets/images/logo.png";
 import { AuthContext } from "../../context/AuthContext";
@@ -115,17 +115,16 @@ export const navLinks = [
   },
 ];
 
-
-export default function Header () {
+export default function Header() {
   const headerRef = useRef(null);
   const menuRef = useRef(null);
-  const { user, dispatch } = useContext(AuthContext);
+  // const { user, dispatch } = useContext(AuthContext);
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [activeNestedDropdown, setActiveNestedDropdown] = useState(null);
   const pathname = usePathname();
 
   const logout = () => {
-    dispatch({ type: "LOGOUT" });
+    // dispatch({ type: "LOGOUT" });
   };
 
   // useEffect(() => {
@@ -146,21 +145,24 @@ export default function Header () {
   // }, [pathname]);
 
   const stickyHeaderFunc = () => {
-    window.addEventListener('scroll', () => {
-      if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-        headerRef.current.classList.add('sticky__header');
+    window.addEventListener("scroll", () => {
+      if (
+        document.body.scrollTop > 80 ||
+        document.documentElement.scrollTop > 80
+      ) {
+        headerRef.current.classList.add("sticky__header");
       } else {
-        headerRef.current.classList.remove('sticky__header');
+        headerRef.current.classList.remove("sticky__header");
       }
     });
   };
 
   useEffect(() => {
     stickyHeaderFunc();
-    return () => window.removeEventListener('scroll', stickyHeaderFunc);
+    return () => window.removeEventListener("scroll", stickyHeaderFunc);
   }, []);
 
-  const toggleMenu = () => menuRef.current.classList.toggle('show__menu');
+  const toggleMenu = () => menuRef.current.classList.toggle("show__menu");
 
   const handleDropdownToggle = (index) => {
     setActiveDropdown(activeDropdown === index ? null : index);
@@ -175,108 +177,137 @@ export default function Header () {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
       setActiveDropdown(null);
       setActiveNestedDropdown(null);
-      menuRef.current.classList.remove('show__menu');
+      menuRef.current.classList.remove("show__menu");
     }
   };
 
   useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   useEffect(() => {
-    menuRef.current.classList.remove('show__menu');
+    menuRef.current.classList.remove("show__menu");
     setActiveDropdown(null);
     setActiveNestedDropdown(null);
   }, [pathname]);
 
   return (
     <>
-    <header className="header" ref={headerRef}>
-      <Container>
-        <Row>
-          <div className="nav__wrapper d-flex align-items-center justify-content-between">
-            <Link href="/">
-              <div className="logo">
-                <Image src="/assets/images/logo.png" alt="Logo" width={100} height={100} />
-              </div>
-            </Link>
+      <header className="header" ref={headerRef}>
+        <Container>
+          <Row>
+            <div className="nav__wrapper d-flex align-items-center justify-content-between">
+              <Link href="/">
+                <div className="logo">
+                  <Image
+                    src="/assets/images/logo.png"
+                    alt="Logo"
+                    width={100}
+                    height={100}
+                  />
+                </div>
+              </Link>
 
-            <nav className="navigation" ref={menuRef}>
-              <ul className="menu d-flex align-items-center">
-                {navLinks.map((navLink, index) => (
-                  <li key={index} className="nav__item">
-                    {navLink.path ? (
-                      <Link href={navLink.path} className={pathname === navLink.path ? "active__link" : ""}>
-                        {navLink.display}
-                      </Link>
-                    ) : (
-                      <div className="dropdown">
-                        <span
-                          className="dropdown-toggles"
-                          onClick={() => setActiveDropdown(activeDropdown === index ? null : index)}
+              <nav className="navigation" ref={menuRef}>
+                <ul className="menu d-flex align-items-center">
+                  {navLinks.map((navLink, index) => (
+                    <li key={index} className="nav__item">
+                      {navLink.path ? (
+                        <Link
+                          href={navLink.path}
+                          className={
+                            pathname === navLink.path ? "active__link" : ""
+                          }
                         >
                           {navLink.display}
-                          <span className={`arrow ${activeDropdown === index ? "open" : ""}`}>
-                            <i className="ri-arrow-down-s-line"></i>
+                        </Link>
+                      ) : (
+                        <div className="dropdown">
+                          <span
+                            className="dropdown-toggles"
+                            onClick={() =>
+                              setActiveDropdown(
+                                activeDropdown === index ? null : index
+                              )
+                            }
+                          >
+                            {navLink.display}
+                            <span
+                              className={`arrow ${
+                                activeDropdown === index ? "open" : ""
+                              }`}
+                            >
+                              <i className="ri-arrow-down-s-line"></i>
+                            </span>
                           </span>
-                        </span>
-                        <ul className={`dropdown-menu ${activeDropdown === index ? "show" : ""}`}>
-                          {navLink.subLinks?.map((subLink, subIndex) => (
-                            <li key={subIndex} className="dropdown-item">
-                              <Link href={subLink.path ?? ""}>{subLink.display}</Link>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </nav>
+                          <ul
+                            className={`dropdown-menu ${
+                              activeDropdown === index ? "show" : ""
+                            }`}
+                          >
+                            {navLink.subLinks?.map((subLink, subIndex) => (
+                              <li key={subIndex} className="dropdown-item">
+                                <Link href={subLink.path ?? ""}>
+                                  {subLink.display}
+                                </Link>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </nav>
 
-            <div className="nav__right d-flex align-items-center gap-4">
-              <div className="nav__btns d-flex align-items-center gap-4">
-                {user ? (
-                  <>
-                    <h5 className="mb-0">{user.username}</h5>
-                    <Button className="btn btn-dark" onClick={logout}>
-                      Logout
-                    </Button>
-                  </>
-                ) : (
-                  <>
-                    {/* <Button className="btn secondary__btn">
+              <div className="nav__right d-flex align-items-center gap-4">
+                <div className="nav__btns d-flex align-items-center gap-4">
+                  {"user" == "user" ? (
+                    <>
+                      {/* <h5 className="mb-0">{user.username}</h5> */}
+                      <Button className="btn btn-dark" onClick={logout}>
+                        Logout
+                      </Button>
+                    </>
+                  ) : (
+                    <>
+                      {/* <Button className="btn secondary__btn">
                       <Link href="/login">Login</Link>
                     </Button> */}
-                    {/* <Link href="/Login" passHref>
+                      {/* <Link href="/Login" passHref>
                       <Button className="btn secondary__btn">Login</Button>
                     </Link> */}
-                    <Link href="/login" passHref>
-                      <Button className="btn secondary__btn">Login</Button>
-                    </Link>
-                    <Button className="btn primary__btn">
-                      <Link href="/register">Register</Link>
-                    </Button>
-                  </>
-                )}
-                {/* <Button className="btn secondary__btn">
+                      <Link href="/login" passHref>
+                        <Button className="btn secondary__btn">Login</Button>
+                      </Link>
+                      <Button className="btn primary__btn">
+                        <Link href="/register">Register</Link>
+                      </Button>
+                    </>
+                  )}
+                  {/* <Button className="btn secondary__btn">
                   <Link href="/login">Login</Link>
                 </Button>
                 <Button className="btn primary__btn">
                   <Link href="/register">Register</Link>
                 </Button> */}
+                </div>
+                <span
+                  className="mobile__menu"
+                  onClick={() =>
+                    menuRef.current?.classList.toggle("show__menu")
+                  }
+                >
+                  <i className="ri-menu-fold-line"></i>
+                </span>
               </div>
-              <span className="mobile__menu" onClick={() => menuRef.current?.classList.toggle("show__menu")}>
-                <i className="ri-menu-fold-line"></i>
-              </span>
             </div>
-          </div>
-        </Row>
-      </Container>
-    </header>
+          </Row>
+        </Container>
+      </header>
     </>
   );
-};
+}
 
 // export default Header;

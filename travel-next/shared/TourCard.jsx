@@ -18,8 +18,8 @@ const TourCard = ({tour}) => {
   return (
     <div className="tour__card">
         <Card>
-            <div className="tour__img">
-                <Image src={"https://picsum.photos/200/300"} alt="tour-img" 
+            <div className="tour__img"> 
+                <Image src={"https://picsum.photos/300/200"} alt="tour-img" 
                 width={300} 
                 height={200}
                 style={{ objectFit: "cover", borderRadius: "10px" }}

@@ -55,19 +55,19 @@ const Footer = () => {
               <div className="social__links d-flex align-items-center gap-4">
                 <span>
                   <Link href='#'>
-                    <i class="ri-youtube-line"></i>
+                    {/* <i class="ri-youtube-line"></i> */}
                   </Link>
 
                   <Link href='#'>
-                    <i class="ri-github-fill"></i>
+                    {/* <i class="ri-github-fill"></i> */}
                   </Link>
 
                   <Link href='#'>
-                    <i class="ri-facebook-circle-line"></i>
+                    {/* <i class="ri-facebook-circle-line"></i> */}
                   </Link>
 
                   <Link href='#'>
-                    <i class="ri-instagram-line"></i>
+                    {/* <i class="ri-instagram-line"></i> */}
                   </Link>
                 </span>
               </div>
@@ -106,7 +106,7 @@ const Footer = () => {
               <ListGroupItem className="ps-0 border-0 d-flex align-items-center gap-3">
                <h6 className='mb-0 d-flex align-items-center gap-2'>
                 <span>
-                  <i class="ri-map-pin-line"></i>
+                  {/* <i class="ri-map-pin-line"></i> */}
                   Address: 
                 </span>
                </h6>
@@ -116,7 +116,7 @@ const Footer = () => {
                <ListGroupItem className="ps-0 border-0 d-flex align-items-center gap-3">
                <h6 className='mb-0 d-flex align-items-center gap-2'>
                 <span>
-                  <i class="ri-mail-line"></i>
+                  {/* <i class="ri-mail-line"></i> */}
                   Email: 
                 </span>
                </h6>
@@ -126,7 +126,7 @@ const Footer = () => {
               <ListGroupItem className="ps-0 border-0 d-flex align-items-center gap-3">
                <h6 className='mb-0 d-flex align-items-center gap-2'>
                 <span>
-                <i class="ri-phone-line"></i>
+                {/* <i class="ri-phone-line"></i> */}
                   Phone: 
                 </span>
                </h6>

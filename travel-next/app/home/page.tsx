@@ -75,7 +75,7 @@ export default function Home() {
               </div>
             </Col>
             <Col lg="2">
-              <div className="hero__Image-box mt-5">
+              <div className="hero__img-box mt-5">
                 <Image
                   src="/assets/images/hero-img02.jpg"
                   alt=""

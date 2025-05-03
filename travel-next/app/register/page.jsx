@@ -45,7 +45,7 @@ const handleClick = async (e) => {
 
   try {
     // const res = await fetch(`${BASE_URL}/auth/register`, {
-    const res = await fetch("/api/auth/register", {
+    const res = await fetch(`${BASE_URL}/auth/register`, {
       method: "post",
       headers: {
         "content-type": "application/json",
@@ -89,7 +89,7 @@ const handleClick = async (e) => {
 
                 <Form onSubmit={handleClick}>
                   <FormGroup>
-                    <input type="text" placeholder='username' required id='username' onChange={handleChange} />
+                    <input type="text" placeholder='name' required id='name' onChange={handleChange} />
                   </FormGroup>
 
                   <FormGroup>
